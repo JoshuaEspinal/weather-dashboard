@@ -19,9 +19,13 @@ function createCard(i, forecast) {
   newDiv.addClass("bg-dark col m-1");
   cardContainer.append(newDiv);
 
+  let date = forecast.list[i].dt_txt.split(" ")[0];
+
+  let time = forecast.list[i].dt_txt.split(" ")[1];
+
   var newH5 = $("<h5>");
   newH5.addClass("text-white");
-  newH5.text(moment(forecast.list[i].dt_text).format("hh:mm A"));
+  newH5.text(moment(`${date} ${time}`).format("MM/DD/YYYY hh:mm A"));
   newDiv.append(newH5);
 
   var newSpan = $("<h5>");
