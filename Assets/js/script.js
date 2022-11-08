@@ -6,7 +6,7 @@ async function getStateCoordinates(state) {
 }
 
 async function weatherData(lon, lat) {
-  var placeholder = `https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=${lat}&lon=${lon}&appid=432fad41a437703e113b6042a67d5fb6`;
+  var placeholder = `https://api.openweathermap.org/data/2.5/forecast?units=imperial&cnt=5&lat=${lat}&lon=${lon}&appid=432fad41a437703e113b6042a67d5fb6`;
 
   var response = await fetch(placeholder);
   return await response.json();
@@ -21,6 +21,7 @@ function createCard(i, forecast) {
 
   var newH5 = $("<h5>");
   newH5.addClass("text-white");
+  newH5.text(moment(forecast.list[i].dt_text).format("hh:mm A"));
   newDiv.append(newH5);
 
   var newSpan = $("<h5>");
@@ -57,6 +58,9 @@ $(document).ready(function () {
     var response = await getStateCoordinates(state);
     var forecast = await weatherData(response[0].lon, response[0].lat);
     // response[0].lon, response[0].lat
+    console.log(response);
+    console.log(forecast);
+
     $("#city-title").text(forecast.city.name);
 
     $("#temp").text(forecast.list[0].main.feels_like);
