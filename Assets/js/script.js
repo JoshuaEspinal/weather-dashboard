@@ -53,7 +53,6 @@ $(document).ready(function () {
   $("#search-forecast").click(async function (e) {
     e.preventDefault();
     $("#card-container").empty();
-
     var state = $("#city-name").val();
     var response = await getStateCoordinates(state);
     var forecast = await weatherData(response[0].lon, response[0].lat);
@@ -70,5 +69,12 @@ $(document).ready(function () {
     for (var i = 0; i < 5; i++) {
       createCard(i, forecast);
     }
+
+    var newBtn = $("<button>");
+    newBtn.addClass("bg-secondary p-2 text-white w-100 my-2 border-0");
+
+    newBtn.html($("#city-name").val());
+    $("#previous-searches").append(newBtn);
+    $("#city-name").val("");
   });
 });
