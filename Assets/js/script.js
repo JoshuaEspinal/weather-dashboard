@@ -66,12 +66,13 @@ $(document).ready(function () {
   $("#search-forecast").click(async function (e) {
     e.preventDefault();
     $("#card-container").empty();
-    var state = $("#city-name").val();
+    var state = $("#city-name").val().trim();
+    if (state === "") {
+      return;
+    }
     var response = await getStateCoordinates(state);
     var forecast = await weatherData(response[0].lon, response[0].lat);
     // response[0].lon, response[0].lat
-    console.log(response);
-    console.log(forecast);
 
     $("#city-title").text(forecast.city.name);
 
