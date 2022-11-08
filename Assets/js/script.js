@@ -25,7 +25,16 @@ function createCard(i, forecast) {
   newDiv.append(newH5);
 
   var newSpan = $("<h5>");
-  newSpan.text("☀");
+  if (forecast.list[i].weather[0].main === "Rain") {
+    newSpan.text("🌧");
+  } else if (forecast.list[i].weather[0].main === "Clouds") {
+    newSpan.text("⛅");
+  } else if (forecast.list[i].weather[0].main === "Clear") {
+    newSpan.text("☀");
+  } else {
+    newSpan.text("☀");
+  }
+
   newDiv.append(newSpan);
 
   var newUl = $("<ul>");
